@@ -35,7 +35,8 @@ class OpenFileDialog(QtWidgets.QMainWindow):
         self.text_edit.setText(data)
 
 
-app = QtWidgets.QApplication(sys.argv)
-file_d = OpenFileDialog()
-file_d.show()
-sys.exit(app.exec_())
+if __name__=="_main__":
+    app = QtWidgets.QApplication(sys.argv)
+    file_d = OpenFileDialog()
+    file_d.show()
+    sys.exit(app.exec_())
