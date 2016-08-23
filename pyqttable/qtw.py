@@ -8,6 +8,9 @@ class MyDialog(QtWidgets.QWidget):
         super(MyDialog, self).__init__(parent)
         self.setGeometry(300, 300, 450, 210)
 
+        self.button = QtWidgets.QPushButton("test")
+        # self.button.move(30,30)
+
         self.MyTable = QtWidgets.QTableWidget(4, 3)
         self.MyTable.setHorizontalHeaderLabels(['姓名', '身高', '体重'])
 
@@ -40,16 +43,29 @@ class MyDialog(QtWidgets.QWidget):
 
         # 根据内容自适应列宽
         # self.MyTable.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-        self.MyTable.setSortingEnabled(True)        # 排序
+        self.MyTable.setSortingEnabled(True)  # 排序
         # self.MyTable.setShowGrid(False)           # 显示 格子
         self.MyTable.setAlternatingRowColors(True)  # 隔行变色显示
-        self.MyTable.setColumnWidth(0,150)
-
+        self.MyTable.setColumnWidth(0, 150)
 
         layout = QtWidgets.QHBoxLayout()
         layout.addWidget(self.MyTable)
+
+        layout.addWidget(self.button)
+        self.button.clicked.connect(self.button_clicked)
         self.setLayout(layout)
 
+    def button_clicked(self):
+        # cnt = self.MyTable.rowCount()
+        try:
+            cnt = self.MyTable.columnCount()
+            ranges = self.MyTable.selectedRanges()
+            cnt = len(ranges)
+            for i in range(cnt):
+                pass
+            QtWidgets.QMessageBox.information(self, "title", str(cnt))
+        except Exception as e:
+            QtWidgets.QMessageBox.information(self, "Error", str(e))
 
 if __name__ == '__main__':
     import sys
